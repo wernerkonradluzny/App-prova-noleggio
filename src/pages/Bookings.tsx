@@ -180,7 +180,7 @@ function ExtendDialog({ booking, onClose, today }: { booking: Booking; onClose: 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-950/80 p-4" onClick={onClose}>
       <div className="panel w-full max-w-md p-6" onClick={(event) => event.stopPropagation()}>
-        <h2 className="font-display text-2xl text-mist-100">{t('bookings.extendTitle')}</h2>
+        <h2 className="text-2xl font-semibold tracking-tight text-mist-100">{t('bookings.extendTitle')}</h2>
         <p className="mt-1 text-sm text-mist-400">
           <Plate value={booking.reference} /> · {booking.renter.name} · <Plate value={vehicle?.plateNumber} />
         </p>
@@ -225,7 +225,7 @@ function ExtendDialog({ booking, onClose, today }: { booking: Booking; onClose: 
             type="button"
             disabled={saving || endDate <= booking.startDate}
             onClick={() => void confirm()}
-            className="rounded-xl bg-brass-400 px-5 py-2.5 text-sm font-semibold text-ink-950 transition hover:bg-brass-300 disabled:bg-ink-700 disabled:text-mist-500"
+            className="rounded-xl bg-brass-400 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brass-300 disabled:bg-ink-700 disabled:text-mist-500"
           >
             {t('common.confirm')}
           </button>

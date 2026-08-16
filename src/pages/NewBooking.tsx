@@ -229,7 +229,7 @@ export function NewBooking() {
             <div className="space-y-4 p-5">
               {chosen && chosenOffer && (
                 <div>
-                  <p className="font-display text-xl text-mist-100">{locale.modelName(chosenOffer.model)}</p>
+                  <p className="text-xl font-semibold tracking-tight text-mist-100">{locale.modelName(chosenOffer.model)}</p>
                   <p className="text-sm text-mist-400">
                     <Plate value={chosen.plateNumber} /> · {locale.colour(chosen)}
                   </p>
@@ -256,7 +256,7 @@ export function NewBooking() {
                 type="button"
                 disabled={!stillOffered || saving || !datesValid}
                 onClick={() => void submit()}
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-brass-400 px-4 py-3 text-sm font-semibold text-ink-950 transition hover:bg-brass-300 disabled:cursor-not-allowed disabled:bg-ink-700 disabled:text-mist-500"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-brass-400 px-4 py-3 text-sm font-semibold text-white transition hover:bg-brass-300 disabled:cursor-not-allowed disabled:bg-ink-700 disabled:text-mist-500"
               >
                 {t('booking.confirm')}
                 <ArrowRight size={16} className="rtl:rotate-180" />
@@ -337,7 +337,7 @@ function OfferCard({
             </p>
           </div>
           {selectedHere && (
-            <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-brass-400 text-ink-950">
+            <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-brass-400 text-white">
               <Check size={13} strokeWidth={3} />
             </span>
           )}
@@ -383,7 +383,7 @@ function Confirmation({ booking, onAnother }: { booking: Booking; onAnother: () 
           <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-300">
             <Check size={22} />
           </span>
-          <h2 className="font-display text-2xl text-mist-100">
+          <h2 className="text-2xl font-semibold tracking-tight text-mist-100">
             {t('booking.created', { reference: booking.reference })}
           </h2>
           <p className="text-sm leading-relaxed text-mist-400">
@@ -398,7 +398,7 @@ function Confirmation({ booking, onAnother }: { booking: Booking; onAnother: () 
           <div className="flex justify-center gap-3 pt-2">
             <Link
               to="/bookings"
-              className="rounded-xl bg-brass-400 px-5 py-2.5 text-sm font-semibold text-ink-950 transition hover:bg-brass-300"
+              className="rounded-xl bg-brass-400 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brass-300"
             >
               {t('booking.viewBooking')}
             </Link>

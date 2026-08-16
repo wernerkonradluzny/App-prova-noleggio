@@ -106,7 +106,7 @@ function ModelCard({
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h2 className="font-display text-xl leading-tight text-mist-100">{locale.modelName(model)}</h2>
+            <h2 className="text-xl font-semibold leading-tight tracking-tight text-mist-100">{locale.modelName(model)}</h2>
             <p className="mt-0.5 text-xs text-mist-500">
               {t(`class.${model.carClass}`)} · {t('fleet.seats', { count: model.seats })}
             </p>

@@ -210,7 +210,7 @@ function TimelineRow({
               title={`${booking.reference} · ${booking.renter.name} · ${locale.day(booking.startDate)} → ${locale.day(booking.endDate)}`}
               className={`z-10 my-1.5 flex items-center overflow-hidden rounded-md px-2 text-[11px] whitespace-nowrap ${
                 booking.status === 'active'
-                  ? 'bg-brass-400/70 text-ink-950'
+                  ? 'bg-brass-400/80 text-white'
                   : 'bg-sky-500/60 text-ink-950 ring-1 ring-sky-300/30'
               }`}
               style={{ gridRow: 1, gridColumn: `${from + 2} / ${to + 2}` }}

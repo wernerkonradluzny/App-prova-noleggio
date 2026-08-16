@@ -10,6 +10,9 @@ const LINKS = [
   { to: '/bookings', label: 'nav.bookings', icon: ScrollText, end: true },
 ];
 
+const logo = `${import.meta.env.BASE_URL}brand/logo.png`;
+const mark = `${import.meta.env.BASE_URL}brand/mark.png`;
+
 export function Layout({ children }: { children: ReactNode }) {
   const { t, i18n } = useTranslation();
   const location = useLocation();
@@ -17,7 +20,7 @@ export function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen bg-ink-950">
-      <aside className="fixed inset-y-0 start-0 z-30 hidden w-60 flex-col border-e border-ink-700/50 bg-ink-900 lg:flex">
+      <aside className="fixed inset-y-0 start-0 z-30 hidden w-64 flex-col border-e border-ink-700/50 bg-ink-900 lg:flex">
         <Brand />
         <nav className="flex-1 space-y-1 px-3 py-4">
           {LINKS.map((link) => (
@@ -27,9 +30,9 @@ export function Layout({ children }: { children: ReactNode }) {
         <div className="p-3">
           <NavLink
             to="/bookings/new"
-            className={`flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition ${
+            className={`flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition ${
               takingBooking
-                ? 'bg-brass-400 text-ink-950'
+                ? 'bg-brass-400 text-white'
                 : 'bg-brass-400/15 text-brass-300 ring-1 ring-brass-400/30 hover:bg-brass-400/25'
             }`}
           >
@@ -37,10 +40,10 @@ export function Layout({ children }: { children: ReactNode }) {
             {t('nav.newBooking')}
           </NavLink>
         </div>
-        <p className="px-5 pb-5 text-[11px] tracking-wide text-mist-500">{t('app.internal')}</p>
+        <p className="px-5 pb-5 text-[11px] font-medium tracking-wide text-mist-500">{t('app.internal')}</p>
       </aside>
 
-      <div className="lg:ps-60">
+      <div className="lg:ps-64">
         <header className="sticky top-0 z-20 border-b border-ink-700/50 bg-ink-900/85 backdrop-blur">
           <div className="flex items-center justify-between gap-4 px-4 py-3 lg:px-8">
             <div className="lg:hidden">
@@ -50,7 +53,7 @@ export function Layout({ children }: { children: ReactNode }) {
             <button
               type="button"
               onClick={() => void i18n.changeLanguage(i18n.language === 'ar' ? 'en' : 'ar')}
-              className="rounded-lg border border-ink-600/60 px-3 py-1.5 text-sm text-mist-300 transition hover:border-brass-400/50 hover:text-brass-300"
+              className="rounded-lg border border-ink-600/60 px-3 py-1.5 text-sm font-medium text-mist-300 transition hover:border-brass-400/50 hover:text-brass-300"
             >
               {t('common.language')}
             </button>
@@ -71,15 +74,19 @@ export function Layout({ children }: { children: ReactNode }) {
 }
 
 function Brand({ compact = false }: { compact?: boolean }) {
-  const { t } = useTranslation();
+  if (compact) {
+    return (
+      <img
+        src={mark}
+        alt="Five Two Five Rent A Car"
+        className="h-11 w-auto rounded-md bg-white px-2 py-1"
+      />
+    );
+  }
+
   return (
-    <div className={compact ? 'flex items-baseline gap-2' : 'flex items-baseline gap-2.5 px-5 pt-6 pb-2'}>
-      <span className="font-display text-3xl leading-none tracking-[0.18em] text-brass-300">
-        {t('app.name')}
-      </span>
-      <span className="text-[11px] font-medium tracking-[0.22em] text-mist-400 uppercase">
-        {t('app.tagline')}
-      </span>
+    <div className="mx-3 mt-4 rounded-xl bg-white p-3">
+      <img src={logo} alt="Five Two Five Rent A Car" className="w-full" />
     </div>
   );
 }
@@ -98,7 +105,7 @@ function SideLink({ to, label, icon: Icon, end }: LinkProps) {
       to={to}
       end={end}
       className={({ isActive }) =>
-        `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
+        `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
           isActive
             ? 'bg-ink-700/70 text-mist-100 ring-1 ring-ink-600/60'
             : 'text-mist-400 hover:bg-ink-800/60 hover:text-mist-200'
@@ -118,7 +125,7 @@ function TopLink({ to, label, icon: Icon, end }: LinkProps) {
       to={to}
       end={end}
       className={({ isActive }) =>
-        `flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm whitespace-nowrap transition ${
+        `flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium whitespace-nowrap transition ${
           isActive ? 'bg-ink-700/70 text-mist-100' : 'text-mist-400'
         }`
       }

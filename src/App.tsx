@@ -14,7 +14,11 @@ export default function App() {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-ink-950">
-        <span className="font-display text-4xl tracking-[0.3em] text-brass-300">525</span>
+        <img
+          src={`${import.meta.env.BASE_URL}brand/mark.png`}
+          alt="Five Two Five Rent A Car"
+          className="h-16 w-auto rounded-lg bg-white px-3 py-2"
+        />
       </div>
     );
   }

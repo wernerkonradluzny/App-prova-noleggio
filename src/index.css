@@ -16,14 +16,16 @@
   --color-mist-400: #8b96b6;
   --color-mist-500: #67718f;
 
-  --color-brass-200: #efe0b8;
-  --color-brass-300: #dcc389;
-  --color-brass-400: #c9a961;
-  --color-brass-500: #a1854a;
+  /* Logo red — the 2 in 525 — used anywhere the UI previously used brass. */
+  --color-brass-200: #f3c4c7;
+  --color-brass-300: #e56b72;
+  --color-brass-400: #d1202d;
+  --color-brass-500: #a31822;
 
-  --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-arabic: 'Noto Kufi Arabic', 'Inter', ui-sans-serif, sans-serif;
+  /* One family for every label, heading and figure. Cairo covers Arabic. */
+  --font-sans: 'Montserrat', 'Cairo', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Montserrat', 'Cairo', ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: 'Cairo', 'Montserrat', ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -38,14 +40,12 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Arabic gets a face that carries diacritics properly. */
   html.font-arabic body {
     font-family: var(--font-arabic);
   }
 
   html.font-arabic .font-display {
     font-family: var(--font-arabic);
-    letter-spacing: 0;
   }
 
   input,
@@ -56,7 +56,6 @@
     color: inherit;
   }
 
-  /* The date pickers are dark, so their native calendar icon must be too. */
   input[type='date']::-webkit-calendar-picker-indicator {
     filter: invert(0.7);
     cursor: pointer;
@@ -104,8 +103,8 @@
   display: block;
   margin-bottom: 0.375rem;
   font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-mist-400);
 }

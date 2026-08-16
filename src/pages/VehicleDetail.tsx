@@ -47,7 +47,7 @@ export function VehicleDetail() {
           <div className="space-y-4 p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <h1 className="font-display text-2xl leading-tight text-mist-100">{locale.modelName(model)}</h1>
+                <h1 className="text-2xl font-semibold leading-tight tracking-tight text-mist-100">{locale.modelName(model)}</h1>
                 <p className="text-sm text-mist-400">{locale.colour(vehicle)}</p>
               </div>
               <StatusPill status={status} />
