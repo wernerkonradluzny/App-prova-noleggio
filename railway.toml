@@ -1,8 +1,5 @@
-# Railway watches this GitHub repo. These two commands are what it needs:
-# a build that still has Vite available, and a process that stays up on $PORT.
-[build]
-buildCommand = "npm ci --include=dev && npm run build"
-
+# Do not put another `npm ci` here. Nixpacks already installs in its
+# install phase; a second ci is what crashed the last Railway build.
 [deploy]
-startCommand = "npm start"
+startCommand = "npx serve -s dist -l $PORT"
 healthcheckPath = "/"

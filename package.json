@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Internal rental management platform for 525",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

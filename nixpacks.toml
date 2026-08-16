@@ -1,0 +1,18 @@
+# Nixpacks was picking Node 18, which cannot even install Vite 8.
+# It also ran npm ci twice: once in install, then again in our build
+# command, and the second pass tried to delete a cache mount (EBUSY).
+[phases.setup]
+nixPkgs = ["nodejs_22"]
+
+[phases.install]
+cmds = ["npm ci --include=dev"]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "npx serve -s dist -l $PORT"
+
+[variables]
+NPM_CONFIG_PRODUCTION = "false"
+PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1"
