@@ -4,7 +4,7 @@ import type { Booking, CarModel, Vehicle, VehicleServiceState } from '../domain/
 import { CAR_MODELS, seedBookings, seedVehicles } from './seed';
 import { BookingConflictError, type BookingChanges, type NewBooking, type RentalStore, type Snapshot } from './store';
 
-const STORAGE_KEY = 'rental-525/v1';
+const STORAGE_KEY = 'rental-525/v2';
 
 interface Persisted {
   vehicles: Vehicle[];
