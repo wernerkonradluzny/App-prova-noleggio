@@ -1,0 +1,38 @@
+{
+  "name": "rental-525",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Internal rental management platform for 525",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "publish": "bash scripts/publish.sh",
+    "smoke": "node scripts/smoke.mjs",
+    "screenshots": "node scripts/screenshot.mjs",
+    "cars": "python3 scripts/extract-cars.py"
+  },
+  "dependencies": {
+    "date-fns": "^4.4.0",
+    "i18next": "^26.3.6",
+    "lucide-react": "^1.31.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-i18next": "^17.0.11",
+    "react-router-dom": "^7.18.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "playwright": "^1.62.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.1",
+    "vitest": "^4.1.10"
+  }
+}

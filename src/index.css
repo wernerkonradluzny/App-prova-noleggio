@@ -1,0 +1,111 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Sampled from the 525 price sheets so the cropped car photos sit invisibly. */
+  --color-ink-950: #070a1d;
+  --color-ink-900: #0b1226;
+  --color-ink-850: #111629;
+  --color-ink-800: #151d38;
+  --color-ink-700: #1d2748;
+  --color-ink-600: #28345c;
+  --color-ink-500: #3a4870;
+
+  --color-mist-100: #eef1f8;
+  --color-mist-200: #d6dcec;
+  --color-mist-300: #b3bcd6;
+  --color-mist-400: #8b96b6;
+  --color-mist-500: #67718f;
+
+  --color-brass-200: #efe0b8;
+  --color-brass-300: #dcc389;
+  --color-brass-400: #c9a961;
+  --color-brass-500: #a1854a;
+
+  --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: 'Noto Kufi Arabic', 'Inter', ui-sans-serif, sans-serif;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-ink-950);
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    color: var(--color-mist-100);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Arabic gets a face that carries diacritics properly. */
+  html.font-arabic body {
+    font-family: var(--font-arabic);
+  }
+
+  html.font-arabic .font-display {
+    font-family: var(--font-arabic);
+    letter-spacing: 0;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+
+  /* The date pickers are dark, so their native calendar icon must be too. */
+  input[type='date']::-webkit-calendar-picker-indicator {
+    filter: invert(0.7);
+    cursor: pointer;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-ink-900);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-ink-600);
+    border-radius: 999px;
+  }
+}
+
+@utility panel {
+  background-color: color-mix(in srgb, var(--color-ink-850) 85%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-ink-600) 55%, transparent);
+  border-radius: 1rem;
+}
+
+@utility field {
+  width: 100%;
+  border-radius: 0.625rem;
+  border: 1px solid color-mix(in srgb, var(--color-ink-600) 70%, transparent);
+  background-color: color-mix(in srgb, var(--color-ink-950) 60%, transparent);
+  padding: 0.625rem 0.875rem;
+  font-size: 0.9375rem;
+  color: var(--color-mist-100);
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+@utility field-focus {
+  border-color: var(--color-brass-400);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-brass-400) 18%, transparent);
+}
+
+@utility label-text {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-mist-400);
+}
