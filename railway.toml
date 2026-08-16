@@ -1,12 +1,8 @@
-# Railway reads this instead of guessing. Vite only produces static files, so
-# without a start command the container would build, exit, and look "undeployed".
+# Railway watches this GitHub repo. These two commands are what it needs:
+# a build that still has Vite available, and a process that stays up on $PORT.
 [build]
-builder = "NIXPACKS"
-# Dev tooling (Vite, Tailwind) is needed to produce dist/, even though it is not
-# needed at runtime. --include=dev keeps those packages when NODE_ENV=production.
 buildCommand = "npm ci --include=dev && npm run build"
 
 [deploy]
-startCommand = "npx serve -s dist -l tcp://0.0.0.0:$PORT"
+startCommand = "npm start"
 healthcheckPath = "/"
-restartPolicyType = "ON_FAILURE"
