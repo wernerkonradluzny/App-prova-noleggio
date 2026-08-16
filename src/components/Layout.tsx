@@ -10,7 +10,6 @@ const LINKS = [
   { to: '/bookings', label: 'nav.bookings', icon: ScrollText, end: true },
 ];
 
-const logo = `${import.meta.env.BASE_URL}brand/logo.png`;
 const mark = `${import.meta.env.BASE_URL}brand/mark.png`;
 
 export function Layout({ children }: { children: ReactNode }) {
@@ -74,19 +73,27 @@ export function Layout({ children }: { children: ReactNode }) {
 }
 
 function Brand({ compact = false }: { compact?: boolean }) {
+  const wordmark = (
+    <span className="min-w-0 text-[13px] font-bold leading-tight tracking-tight text-black">
+      525 <span className="text-[#d1202d]">Rent a Car</span>
+    </span>
+  );
+
   if (compact) {
     return (
-      <img
-        src={mark}
-        alt="Five Two Five Rent A Car"
-        className="h-11 w-auto rounded-md bg-white px-2 py-1"
-      />
+      <div className="flex items-center gap-2 rounded-md bg-white px-2 py-1">
+        <img src={mark} alt="" className="h-9 w-auto" />
+        {wordmark}
+      </div>
     );
   }
 
   return (
     <div className="mx-3 mt-4 rounded-xl bg-white p-3">
-      <img src={logo} alt="Five Two Five Rent A Car" className="w-full" />
+      <div className="flex items-center gap-3">
+        <img src={mark} alt="Five Two Five" className="h-14 w-auto shrink-0" />
+        {wordmark}
+      </div>
     </div>
   );
 }

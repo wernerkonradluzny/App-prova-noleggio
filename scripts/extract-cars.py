@@ -27,6 +27,11 @@ OUT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 CAR_REGION = 0.44
 # How far a pixel must sit from its row's background before it counts as car.
 CAR_THRESHOLD = 34
+# The Exceed / Tiggo / MG sheet has leftover navy on the left that looks like
+# car at the default threshold, which shoved those three to the right.
+SHEET_THRESHOLD = {
+    "image-74bd1fc2-351f-44a6-bcbe-8dbfd838ee24.png": 55,
+}
 # Breathing room kept around the detected car, in pixels.
 PAD = 14
 # Width of the alpha ramp that melts the crop edge into the app background.
@@ -70,7 +75,7 @@ def row_backgrounds(px, width: int, height: int) -> list[tuple[int, int, int]]:
     return backgrounds
 
 
-def find_bands(im: Image.Image) -> list[tuple[int, int]]:
+def find_bands(im: Image.Image, threshold: int) -> list[tuple[int, int]]:
     """Locate the three horizontal strips that each contain one car."""
     width = int(im.width * CAR_REGION)
     region = im.crop((0, 0, width, im.height))
@@ -78,7 +83,7 @@ def find_bands(im: Image.Image) -> list[tuple[int, int]]:
     backgrounds = row_backgrounds(px, width, im.height)
 
     filled = [
-        sum(1 for x in range(0, width - 14, 3) if distance(px[x, y], backgrounds[y]) > CAR_THRESHOLD)
+        sum(1 for x in range(0, width - 14, 3) if distance(px[x, y], backgrounds[y]) > threshold)
         for y in range(im.height)
     ]
 
@@ -95,7 +100,7 @@ def find_bands(im: Image.Image) -> list[tuple[int, int]]:
     return bands
 
 
-def car_columns(im: Image.Image, top: int, bottom: int) -> tuple[int, int]:
+def car_columns(im: Image.Image, top: int, bottom: int, threshold: int) -> tuple[int, int]:
     """Horizontal extent of the car inside one band."""
     width = int(im.width * CAR_REGION)
     region = im.crop((0, top, width, bottom))
@@ -103,7 +108,7 @@ def car_columns(im: Image.Image, top: int, bottom: int) -> tuple[int, int]:
     backgrounds = row_backgrounds(px, width, region.height)
 
     columns = [
-        sum(1 for y in range(region.height) if distance(px[x, y], backgrounds[y]) > CAR_THRESHOLD)
+        sum(1 for y in range(region.height) if distance(px[x, y], backgrounds[y]) > threshold)
         for x in range(width - 14)
     ]
     hits = [x for x, count in enumerate(columns) if count > 2]
@@ -138,12 +143,13 @@ def main() -> None:
 
     for filename, slugs in SHEETS:
         sheet = Image.open(os.path.join(ASSETS, filename)).convert("RGB")
-        bands = find_bands(sheet)
+        threshold = SHEET_THRESHOLD.get(filename, CAR_THRESHOLD)
+        bands = find_bands(sheet, threshold)
         if len(bands) != len(slugs):
             raise SystemExit(f"{filename}: expected {len(slugs)} cars, found {len(bands)} bands {bands}")
 
         for (top, bottom), slug in zip(bands, slugs):
-            left, right = car_columns(sheet, top, bottom)
+            left, right = car_columns(sheet, top, bottom, threshold)
             box = (
                 max(0, left - PAD),
                 max(0, top - PAD),
